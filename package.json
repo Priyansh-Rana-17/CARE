@@ -1,0 +1,8 @@
+{
+  "name": "care-campus-support",
+  "version": "3.1.0",
+  "description": "CARE: campus issue reporting, SOS, workflow automation, AI report studio, Google Workspace, Gmail sharing and MCP apps. No dependencies.",
+  "main": "server.js",
+  "scripts": { "start": "node server.js", "bundle": "node bundle.js", "mcp": "node mcp-stdio.js" },
+  "engines": { "node": ">=18" }
+}

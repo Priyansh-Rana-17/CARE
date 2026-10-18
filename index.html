@@ -1,0 +1,2234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CARE – Campus support</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#f3f1f8;
+  --card:#fffffff2;
+  --ink:#171b3d;
+  --mut:#6c7192;
+  --line:#e7e5f0;
+  --pri:#4b3fb5;
+  --teal:#0b8d7d;
+  --in:#f6f5fb;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+
+@media(prefers-color-scheme:dark) {
+  :root:not([data-theme=light]) {
+    --bg:#0b0e26;
+    --card:#161b41;
+    --ink:#eceefb;
+    --mut:#9ca2cf;
+    --line:#2a3061;
+    --pri:#9189f2;
+    --teal:#38d2bd;
+    --in:#10143a;
+    color-scheme:dark;
+  }
+}
+
+:root[data-theme=dark] {
+  --bg:#0b0e26;
+  --card:#161b41;
+  --ink:#eceefb;
+  --mut:#9ca2cf;
+  --line:#2a3061;
+  --pri:#9189f2;
+  --teal:#38d2bd;
+  --in:#10143a;
+  color-scheme:dark;
+}
+
+* { box-sizing:border-box; }
+
+html {
+  scroll-padding-top:env(safe-area-inset-top,0px);
+}
+
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font:400 15px/1.45 Outfit,system-ui,sans-serif;
+}
+
+button,select,input,textarea {
+  font:inherit;
+  color:inherit;
+}
+
+button { cursor:pointer; }
+
+:focus-visible {
+  outline:3px solid var(--pri);
+  outline-offset:2px;
+}
+
+.app {
+  display:grid;
+  grid-template-columns:272px 1fr;
+  gap:18px;
+  padding:16px;
+  min-height:100vh;
+}
+
+.side {
+  position:sticky;
+  top:16px;
+  height:calc(100vh - 32px);
+  border-radius:28px;
+  background:linear-gradient(170deg,#1c2468,#0e1440);
+  color:#cfd3f5;
+  padding:22px 14px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.brand {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:6px 12px 22px;
+}
+
+.logo {
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  background:#d9f5ee;
+  color:#0b8d7d;
+  display:grid;
+  place-items:center;
+  font-size:22px;
+}
+
+.brand b {
+  display:block;
+  font-size:22px;
+  letter-spacing:.12em;
+  color:#fff;
+}
+
+.brand small { opacity:.7; }
+
+.nav {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  border:0;
+  background:none;
+  color:inherit;
+  text-align:left;
+  padding:13px 14px;
+  border-radius:14px;
+  font-size:16px;
+}
+
+.nav:hover { background:#ffffff14; }
+
+.nav.on {
+  background:#f1f3ff;
+  color:#2b2f86;
+  font-weight:500;
+}
+
+.nav i {
+  font-style:normal;
+  width:22px;
+  text-align:center;
+}
+
+.nav em {
+  margin-left:auto;
+  background:#ffffff26;
+  border-radius:99px;
+  padding:0 9px;
+  font-size:12px;
+  font-style:normal;
+}
+
+.dot {
+  margin-left:auto;
+  width:8px;
+  height:8px;
+  border-radius:9px;
+  background:#f0564f;
+}
+
+.sp { flex:1; }
+
+.me {
+  display:flex;
+  gap:10px;
+  align-items:center;
+  padding:14px 12px 0;
+  border-top:1px solid #ffffff1f;
+  margin-top:8px;
+}
+
+.av {
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#e4e2ff;
+  color:#4b3fb5;
+  display:grid;
+  place-items:center;
+  font-weight:600;
+  font-size:13px;
+  flex:none;
+}
+
+.me small {
+  display:block;
+  opacity:.7;
+}
+
+main {
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  padding-bottom:90px;
+}
+
+.top {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:12px 16px;
+  position:sticky;
+  top:16px;
+  z-index:5;
+  backdrop-filter:blur(14px);
+}
+
+.seg {
+  display:flex;
+  background:var(--in);
+  border-radius:12px;
+  padding:5px;
+  gap:2px;
+}
+
+.seg button {
+  border:0;
+  background:none;
+  padding:8px 18px;
+  border-radius:9px;
+  color:var(--mut);
+}
+
+.seg .on {
+  background:var(--card);
+  color:var(--pri);
+  font-weight:600;
+  box-shadow:0 1px 4px #0002;
+}
+
+.tools {
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.ib {
+  width:44px;
+  height:44px;
+  border-radius:13px;
+  border:1px solid var(--line);
+  background:var(--card);
+  position:relative;
+  font-size:17px;
+}
+
+.ib b {
+  position:absolute;
+  top:8px;
+  right:9px;
+  width:8px;
+  height:8px;
+  background:#f0564f;
+  border-radius:9px;
+}
+
+.hero {
+  border-radius:30px;
+  background:linear-gradient(120deg,#2b3190,#3d3fa0 50%,#2a7c93);
+  color:#fff;
+  padding:44px 48px;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero h1 {
+  font-size:clamp(34px,5vw,52px);
+  line-height:1.05;
+  margin:10px 0 14px;
+  font-weight:400;
+  letter-spacing:-.02em;
+}
+
+.hero p {
+  margin:0 0 26px;
+  opacity:.9;
+}
+
+.hero .seal {
+  position:absolute;
+  right:70px;
+  top:50%;
+  translate:0 -50%;
+  width:240px;
+  height:240px;
+  border-radius:50%;
+  border:1px solid #ffffff30;
+  background:#ffffff10;
+  display:grid;
+  place-items:center;
+  font-size:44px;
+  letter-spacing:.2em;
+  opacity:.55;
+}
+
+.btn {
+  border:1px solid transparent;
+  border-radius:14px;
+  padding:15px 24px;
+  font-weight:500;
+  font-size:17px;
+}
+
+.b1 {
+  background:#fff;
+  color:#3b3fa0;
+}
+
+.b2 {
+  background:#ffffff1f;
+  border-color:#ffffff50;
+  color:#fff;
+}
+
+.bp {
+  background:linear-gradient(180deg,#5b4fc9,#43379f);
+  color:#fff;
+  width:100%;
+}
+
+.cols {
+  display:grid;
+  grid-template-columns:1fr 340px;
+  gap:20px;
+  align-items:start;
+}
+
+.lab {
+  font-size:12px;
+  letter-spacing:.14em;
+  color:var(--mut);
+  text-transform:uppercase;
+}
+
+h2 {
+  font-weight:400;
+  font-size:28px;
+  margin:2px 0 14px;
+}
+
+.sh {
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+}
+
+.sh a {
+  color:var(--teal);
+  cursor:pointer;
+  font-weight:500;
+}
+
+.rep {
+  display:flex;
+  gap:16px;
+  align-items:center;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-left:3px solid #aaa;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:14px;
+  cursor:pointer;
+}
+
+.rep.s-Inprogress { border-left-color:#e29b2d; }
+.rep.s-Assigned { border-left-color:#4d8de0; }
+.rep.s-Resolved { border-left-color:#2c9d73; }
+.rep.s-Reopened { border-left-color:#e0564f; }
+
+.ico {
+  width:60px;
+  height:60px;
+  border-radius:16px;
+  background:var(--in);
+  display:grid;
+  place-items:center;
+  font-size:26px;
+  flex:none;
+}
+
+.rb {
+  flex:1;
+  min-width:0;
+}
+
+.rb b {
+  display:block;
+  font-size:19px;
+  font-weight:500;
+}
+
+.m {
+  color:var(--mut);
+  font-size:14px;
+}
+
+.pill {
+  font-size:12px;
+  border-radius:99px;
+  padding:3px 10px;
+  background:#ece9f8;
+  color:#5a4fb5;
+  white-space:nowrap;
+  font-weight:500;
+}
+
+.Inprogress { background:#fdeccb; color:#9a5d00; }
+.Assigned { background:#dbe9fd; color:#2557a7; }
+.Resolved { background:#d5f1e5; color:#17734f; }
+.Reopened { background:#fbd9d6; color:#a3302a; }
+
+.imp {
+  background:linear-gradient(150deg,#2b3190,#3a3a9f);
+  color:#fff;
+  border-radius:24px;
+  padding:26px;
+  margin-bottom:16px;
+}
+
+.imp .sc {
+  float:right;
+  width:84px;
+  height:84px;
+  border-radius:50%;
+  border:5px solid #4fd9bd;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  font-size:22px;
+  line-height:1;
+}
+
+.imp .sc small {
+  font-size:11px;
+  display:block;
+}
+
+.bar {
+  height:6px;
+  background:#ffffff30;
+  border-radius:9px;
+  margin:16px 0 8px;
+}
+
+.bar i {
+  display:block;
+  height:100%;
+  background:#4fd9bd;
+  border-radius:9px;
+}
+
+.card {
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:22px;
+}
+
+.card h3 {
+  margin:0 0 4px;
+  font-weight:400;
+  font-size:21px;
+}
+
+.tel {
+  font-size:28px;
+  color:var(--teal);
+  font-weight:500;
+  margin:4px 0;
+}
+
+.alert {
+  display:flex;
+  align-items:center;
+  gap:16px;
+  background:#fdeded;
+  border:1px solid #f3b9b6;
+  color:#3a1a1a;
+  border-radius:20px;
+  padding:18px 22px;
+}
+
+.alert .sos { flex:none; }
+.alert div { flex:1; }
+
+.sosb {
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:#e1403f;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-weight:700;
+}
+
+.stats {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+
+.st {
+  background:var(--card);
+  border:1px solid var(--line);
+  border-top:3px solid var(--teal);
+  border-radius:18px;
+  padding:18px;
+}
+
+.st b {
+  display:block;
+  font-size:34px;
+  font-weight:500;
+}
+
+.st small { color:var(--teal); }
+
+table {
+  width:100%;
+  border-collapse:collapse;
+}
+
+th {
+  font-size:11px;
+  letter-spacing:.12em;
+  color:var(--mut);
+  text-align:left;
+  padding:10px 12px;
+  border-bottom:1px solid var(--line);
+}
+
+td {
+  padding:12px;
+  border-bottom:1px solid var(--line);
+  vertical-align:middle;
+}
+
+td small {
+  display:block;
+  color:var(--mut);
+}
+
+td b {
+  cursor:pointer;
+  font-weight:500;
+}
+
+.p-High { color:#c0392b; }
+.p-Medium { color:#b9770e; }
+.p-Low { color:#17734f; }
+.p-Critical { color:#c0392b; font-weight:600; }
+
+select,
+input[type=text],
+input[type=tel],
+textarea {
+  background:var(--in);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px 12px;
+  width:100%;
+}
+
+td select {
+  width:auto;
+  max-width:150px;
+}
+
+.hs { margin:14px 0; }
+
+.hs div {
+  display:flex;
+  justify-content:space-between;
+}
+
+.hs i {
+  display:block;
+  height:7px;
+  border-radius:9px;
+  background:var(--line);
+  margin-top:6px;
+  overflow:hidden;
+}
+
+.hs i s {
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,#0b8d7d,#4d8de0);
+}
+
+.flag {
+  background:#fdf1dc;
+  color:#5c3b00;
+  border-radius:14px;
+  padding:14px;
+  margin-top:12px;
+}
+
+.sosf {
+  position:fixed;
+  right:max(24px,env(safe-area-inset-right,0px));
+  bottom:calc(24px + env(safe-area-inset-bottom,0px));
+  width:96px;
+  height:96px;
+  border-radius:50%;
+  border:4px solid #fff;
+  background:radial-gradient(#ee4b49,#c52b2b);
+  color:#fff;
+  box-shadow:0 8px 30px #e1403f88;
+  z-index:20;
+  font-weight:700;
+  font-size:23px;
+  line-height:1.05;
+  touch-action:none;
+  user-select:none;
+  transition:scale .2s;
+}
+
+.sosf small {
+  display:block;
+  font-weight:400;
+  font-size:10px;
+}
+
+.sosf.hold {
+  scale:1.18;
+  transition:scale 1.2s linear;
+}
+
+.ov {
+  position:fixed;
+  inset:0;
+  background:#0a0e2299;
+  backdrop-filter:blur(6px);
+  display:grid;
+  place-items:center;
+  padding:16px;
+  z-index:50;
+}
+
+.mod {
+  background:var(--bg);
+  width:min(680px,100%);
+  max-height:92vh;
+  overflow:auto;
+  border-radius:30px;
+  padding:34px;
+}
+
+.chips {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:8px 0 18px;
+}
+
+.chip {
+  border:1px solid var(--line);
+  background:var(--card);
+  border-radius:99px;
+  padding:8px 16px;
+}
+
+.chip.on {
+  border-color:var(--pri);
+  background:#ebe8ff;
+  color:#3b2fa6;
+}
+
+.g2 {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-bottom:18px;
+}
+
+label.l {
+  font-weight:500;
+  display:block;
+  margin-bottom:6px;
+}
+
+.drop {
+  border:1.5px dashed var(--line);
+  border-radius:16px;
+  padding:22px;
+  text-align:center;
+  color:var(--teal);
+  background:var(--card);
+  margin-bottom:18px;
+  cursor:pointer;
+  display:block;
+}
+
+.anon {
+  display:flex;
+  gap:14px;
+  align-items:center;
+  background:var(--card);
+  border-radius:16px;
+  padding:14px 16px;
+  margin:18px 0;
+}
+
+.anon small {
+  color:var(--mut);
+  display:block;
+}
+
+.tl {
+  border-left:2px solid var(--line);
+  margin:14px 0 14px 6px;
+  padding-left:16px;
+}
+
+.tl div { margin-bottom:10px; }
+
+.toast {
+  position:fixed;
+  left:50%;
+  translate:-50% 0;
+  bottom:calc(30px + env(safe-area-inset-bottom,0px));
+  background:#171b3d;
+  color:#fff;
+  padding:14px 22px;
+  border-radius:14px;
+  z-index:60;
+  max-width:90vw;
+}
+
+:root {
+  --g1:#cdeee6;
+  --g2:#ddd6fa;
+  --g3:#f6e3da;
+  --gl:rgba(255,255,255,.58);
+  --gb:rgba(255,255,255,.8);
+}
+
+@media(prefers-color-scheme:dark) {
+  :root:not([data-theme=light]) {
+    --g1:#0f3d48;
+    --g2:#262072;
+    --g3:#2b1d44;
+    --gl:rgba(30,36,86,.5);
+    --gb:rgba(255,255,255,.1);
+  }
+}
+
+:root[data-theme=dark] {
+  --g1:#0f3d48;
+  --g2:#262072;
+  --g3:#2b1d44;
+  --gl:rgba(30,36,86,.5);
+  --gb:rgba(255,255,255,.1);
+}
+
+body {
+  background:
+    radial-gradient(800px 520px at 2% 0,var(--g1),transparent 65%),
+    radial-gradient(900px 640px at 100% 8%,var(--g2),transparent 65%),
+    radial-gradient(800px 600px at 55% 105%,var(--g3),transparent 65%),
+    var(--bg);
+  background-attachment:fixed;
+}
+
+svg {
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  width:20px;
+  height:20px;
+  vertical-align:middle;
+  flex:none;
+}
+
+.m svg {
+  width:15px;
+  height:15px;
+  margin-right:2px;
+}
+
+.card,.rep,.st,.top,.anon,.drop,.mod {
+  background:var(--gl);
+  -webkit-backdrop-filter:blur(20px) saturate(1.5);
+  backdrop-filter:blur(20px) saturate(1.5);
+  border:1px solid var(--gb);
+  box-shadow:0 10px 34px rgba(50,50,120,.08);
+}
+
+.mod {
+  background:color-mix(in srgb,var(--bg) 70%,transparent);
+  border-radius:34px;
+  -webkit-backdrop-filter:blur(30px);
+  backdrop-filter:blur(30px);
+}
+
+.ov {
+  background:rgba(70,92,92,.5);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+}
+
+.top { border-radius:24px; }
+
+.ib {
+  background:var(--gl);
+  border-color:var(--gb);
+  display:grid;
+  place-items:center;
+}
+
+.ib b {
+  top:9px;
+  right:10px;
+}
+
+.side {
+  background:linear-gradient(160deg,#202870,#0d1342);
+  box-shadow:0 20px 50px rgba(20,24,80,.28);
+}
+
+.nav svg { width:21px; height:21px; }
+
+.nav.on {
+  background:linear-gradient(90deg,#fff,#eceffd);
+  color:#2b2f86;
+  box-shadow:inset 3px 0 0 #0b8d7d;
+}
+
+.logo {
+  background:linear-gradient(145deg,#e6f9f3,#b9ecdf);
+}
+
+.logo svg {
+  width:24px;
+  height:24px;
+}
+
+.hero {
+  background:linear-gradient(110deg,#2c3192 0,#3d3fa2 48%,#2b7f95 100%);
+}
+
+.hero::before {
+  content:"";
+  position:absolute;
+  inset:22px;
+  border:1px solid #ffffff1f;
+  border-radius:22px;
+  pointer-events:none;
+}
+
+.hero>* { position:relative; }
+
+.hero h1 { font-weight:300; }
+
+.hero .lab {
+  font-weight:500;
+  letter-spacing:.2em;
+  font-size:11px;
+}
+
+.btn {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+
+.b1 { color:#3b3fa0; }
+
+.b2 { background:#ffffff1a; }
+
+.hero .seal {
+  display:grid;
+  align-content:center;
+  justify-items:center;
+  gap:6px;
+  width:250px;
+  height:250px;
+  font-size:52px;
+  font-weight:600;
+  letter-spacing:.16em;
+  color:#bfe6e8;
+  opacity:.55;
+  background:radial-gradient(#ffffff18,#ffffff06);
+  box-shadow:0 0 0 38px #ffffff08;
+}
+
+.seal svg {
+  width:92px;
+  height:92px;
+  stroke-width:1.3;
+}
+
+.rep {
+  border-left:1px solid var(--gb);
+  position:relative;
+}
+
+.rep[class*=" s-"] { border-left-width:3px; }
+
+.rep.s-Submitted,
+.rep.s-Underreview {
+  border-left-color:#9a8fe0;
+}
+
+.rep>.pill {
+  position:absolute;
+  top:16px;
+  right:64px;
+}
+
+.ico {
+  background:#e1ece9;
+  color:#6f8f89;
+}
+
+.ico svg {
+  width:26px;
+  height:26px;
+}
+
+.s-Inprogress .ico {
+  background:#fdebd0;
+  color:#d98a1a;
+}
+
+.s-Assigned .ico {
+  background:#dbe8fb;
+  color:#3d7ad1;
+}
+
+.s-Resolved .ico {
+  background:#d3f0e3;
+  color:#23956a;
+}
+
+.rb .pill { display:inline-block; }
+
+.mt {
+  padding:10px 16px;
+  font-size:14px;
+  background:var(--in);
+  border-color:var(--line);
+}
+
+.st {
+  position:relative;
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  border-top:1px solid var(--gb);
+  overflow:hidden;
+}
+
+.st::before {
+  content:"";
+  position:absolute;
+  inset:0 0 auto;
+  height:3px;
+  background:var(--bar);
+}
+
+.si {
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  flex:none;
+}
+
+.st b {
+  line-height:1.1;
+  margin:2px 0;
+}
+
+.alert {
+  background:linear-gradient(90deg,#fdeeee,#fbe2e2);
+  border-color:#f2b8b5;
+}
+
+.alert svg { display:none; }
+
+.gh {
+  font-size:44px;
+  font-weight:300;
+  letter-spacing:-.02em;
+  margin:6px 0;
+}
+
+.dl {
+  background:transparent;
+  border:1px solid var(--ink);
+  padding:12px 22px;
+  font-size:15px;
+  color:var(--ink);
+}
+
+.bsel {
+  width:auto;
+  background:var(--card);
+  border-radius:12px;
+}
+
+select.as {
+  background:var(--card);
+  border-radius:10px;
+  min-width:118px;
+}
+
+.ps {
+  width:auto;
+  border:0;
+  padding:6px 12px;
+  font-size:13px;
+}
+
+.hs i s {
+  background:linear-gradient(90deg,#0b8d7d,#3f8fdc);
+}
+
+.flag {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  background:#fdf0dc;
+  color:#5c3b00;
+}
+
+.sosf {
+  border:5px solid #ffffffee;
+  box-shadow:0 0 0 9px #e1403f33,0 12px 30px #e1403f88;
+}
+
+.chip.on {
+  background:#efeaff;
+  border-color:#6a5be0;
+  color:#4b3fb5;
+}
+
+.drop svg { width:22px; height:22px; }
+
+input.sw {
+  -webkit-appearance:none;
+  appearance:none;
+  width:52px;
+  height:30px;
+  border-radius:99px;
+  background:#cfd2de;
+  position:relative;
+  flex:none;
+  border:0;
+  cursor:pointer;
+}
+
+input.sw::after {
+  content:"";
+  position:absolute;
+  left:3px;
+  top:3px;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:#fff;
+  transition:left .2s;
+  box-shadow:0 1px 3px #0004;
+}
+
+input.sw:checked { background:#5b4fc9; }
+input.sw:checked::after { left:25px; }
+
+@media(max-width:900px) {
+  .app {
+    grid-template-columns:1fr;
+    padding:10px;
+  }
+
+  .side {
+    position:static;
+    height:auto;
+    flex-direction:row;
+    overflow-x:auto;
+    border-radius:22px;
+    padding:10px;
+  }
+
+  .brand,.sp,.me { display:none; }
+
+  .nav {
+    width:auto;
+    white-space:nowrap;
+    padding:10px 12px;
+    font-size:14px;
+  }
+
+  .nav em,.dot { margin-left:4px; }
+
+  .cols { grid-template-columns:1fr; }
+  .stats { grid-template-columns:1fr 1fr; }
+  .hero { padding:30px 24px; }
+  .hero .seal { display:none; }
+  .top { top:8px; }
+  .g2 { grid-template-columns:1fr; }
+  .mod { padding:24px; }
+
+  table {
+    display:block;
+    overflow-x:auto;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  * { transition:none!important; }
+}
+
+/* ===== Sidebar: light card, 260px wide, collapsible ===== */
+.app{grid-template-columns:244px 1fr;transition:grid-template-columns .22s ease}
+.app.sc{grid-template-columns:66px 1fr}
+.side{background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:0 10px 30px rgba(75,63,181,.08);border-radius:22px;padding:16px 10px 12px;gap:4px;overflow:visible}
+.side .brand{padding:4px 8px 22px;gap:12px}
+.side .logo{width:38px;height:38px;border-radius:14px;background:linear-gradient(145deg,#5b4fc9,#4338b0);color:#fff;font-size:22px;flex:none}
+.side .logo svg{width:20px;height:20px}
+.side .brand b{color:var(--ink);font-size:17px;letter-spacing:.2em;font-weight:600}
+.side .brand small{color:var(--mut);opacity:1;font-size:12px}
+.side .nav .nl{white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.side .nav{position:relative;color:var(--ink);opacity:.86;padding:9px 10px;border-radius:12px;font-size:14.5px;gap:10px;border:1px solid transparent;background:none;box-shadow:none}
+.side .nav i{color:var(--mut);display:grid;place-items:center}
+.side .nav svg{width:18px;height:18px}
+.side .nav:hover{background:var(--in);opacity:1}
+.side .nav.on{background:color-mix(in srgb,var(--pri) 10%,transparent);border-color:color-mix(in srgb,var(--pri) 18%,transparent);color:var(--pri);opacity:1;font-weight:500;box-shadow:inset 3px 0 0 var(--teal)}
+.side .nav.on i{color:var(--pri)}
+.side .nav em{background:var(--card);border:1px solid var(--line);color:var(--pri);padding:0 8px;flex:none;font-weight:500}
+.side .me{border-top:1px solid var(--line);margin-top:auto;padding:12px 8px 0;color:var(--ink)}
+.side .sbstat{margin-bottom:12px}
+.side .me small{color:var(--mut);opacity:1}
+.sbstat{display:flex;gap:10px;align-items:center;margin-top:8px;padding:9px 12px;border-radius:14px;background:color-mix(in srgb,var(--teal) 9%,var(--card));border:1px solid color-mix(in srgb,var(--teal) 24%,transparent)}
+.sbstat b{display:block;font-weight:500;font-size:13px;color:var(--ink)}
+.sbstat small{display:block;color:var(--mut);font-size:12px}
+.sbdot{flex:none;width:10px;height:10px;border-radius:50%;background:#19b98a;box-shadow:0 0 0 4px #19b98a2e}
+.sbt{position:absolute;top:34px;right:-15px;z-index:5;width:28px;height:28px;padding:0;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--mut);display:grid;place-items:center;box-shadow:0 2px 8px rgba(30,30,80,.12)}
+.sbt:hover{color:var(--pri);border-color:var(--pri)}
+.sbt svg{transition:transform .22s ease}
+.app.sc .sbt svg{transform:rotate(180deg)}
+.app.sc .side{padding:20px 10px 14px;align-items:stretch}
+.app.sc .side .brand{justify-content:center;padding:4px 0 22px}
+.app.sc .side .bt,.app.sc .side .nl{display:none}
+.app.sc .side .nav{justify-content:center;padding:10px 0}
+.app.sc .side .nav em{position:absolute;top:2px;right:4px;margin:0;padding:0 6px;font-size:10px;line-height:16px}
+.app.sc .side .nav .dot{position:absolute;top:9px;right:14px;margin:0}
+.app.sc .sbstat{justify-content:center;padding:12px 0}
+.app.sc .side .me{justify-content:center;padding:12px 0 0}
+@media(max-width:900px){.app,.app.sc{grid-template-columns:1fr}.sbt,.sbstat{display:none}.side .bt{display:block}.side .nl{display:inline}.side .nav{padding:10px 12px;font-size:14px}}
+
+/* ===== Compact sizing: smaller cards, hero, buttons and spacing (style only) ===== */
+body{font-size:14px}
+.app{gap:14px;padding:12px}
+.side{top:12px;height:calc(100vh - 24px)}
+main{gap:14px}
+.top{padding:8px 14px;border-radius:18px;top:12px}
+h2{font-size:22px;margin:2px 0 10px}
+h3{font-size:16px}
+.lab{font-size:11px}
+.hero{padding:26px 32px;border-radius:22px}
+.hero h1{font-size:clamp(24px,3.2vw,34px);margin:6px 0 8px}
+.hero p{margin:0 0 16px}
+.hero .seal{width:170px;height:170px;font-size:36px;right:40px}
+.btn{padding:10px 18px;font-size:14.5px;border-radius:12px}
+.card{padding:16px;border-radius:18px}
+.rep{padding:14px;gap:12px;margin-bottom:10px;border-radius:16px}
+.ico{width:44px;height:44px;border-radius:13px;font-size:20px}
+.rb b{font-size:16px}
+.imp{padding:18px;border-radius:20px;margin-bottom:12px}
+.imp .sc{width:64px;height:64px;border-width:4px;font-size:18px}
+.tel{font-size:22px}
+.cols{grid-template-columns:1fr 300px;gap:16px}
+.stats{gap:12px}
+.st{padding:14px;border-radius:16px}
+.st b{font-size:26px}
+.chip{padding:6px 13px}
+th{padding:8px 10px}
+td{padding:9px 10px}
+</style>
+</head>
+
+<body>
+<div class="app">
+  <aside class="side" id="side"></aside>
+  <main id="main"></main>
+</div>
+
+<button class="sosf" id="sosb" aria-label="Hold for 1 second to send SOS">
+  SOS
+  <small>Hold for help</small>
+</button>
+
+<div id="layer"></div>
+
+<script>
+const $=s=>document.querySelector(s),
+esc=s=>String(s??'').replace(/[&<>"']/g,c=>({
+  '&':'&amp;',
+  '<':'&lt;',
+  '>':'&gt;',
+  '"':'&quot;',
+  "'":'&#39;'
+}[c])),
+K='care-v2',
+N=Date.now(),
+MN=6e4;
+
+const BLD={
+  'Science Block':['Room 204','Lab 204','Floor 2'],
+  'Engineering':['Room 104','Workshop'],
+  'Arts Block':['Room 206'],
+  'Library':['Reading Hall','East Wing'],
+  'Student Centre':['Cafeteria','Washroom G']
+};
+
+const CATS=['Electrical','Plumbing','Cleanliness','Equipment','Safety'];
+
+const CI={
+  Electrical:'💡',
+  Plumbing:'🚰',
+  Cleanliness:'🧹',
+  Equipment:'📽️',
+  Safety:'🛡️'
+};
+
+const ST=[
+  'Submitted',
+  'Under review',
+  'Assigned',
+  'In progress',
+  'Resolved',
+  'Reopened'
+];
+
+const TEAM=[
+  'Unassigned',
+  'Akash M.',
+  'Neha P.',
+  'Housekeeping',
+  'IT support',
+  'Security team'
+];
+
+const R=(id,title,cat,bld,room,status,pri,as,by,m)=>({
+  id,title,cat,bld,room,status,pri,as,by,
+  me:0,
+  desc:'',
+  upd:N-m*MN,
+  hist:[[status,N-m*MN]]
+});
+
+let S=null;
+
+try {
+  S=JSON.parse(localStorage.getItem(K));
+} catch(e) {}
+
+if(!S) {
+  S={
+    seq:1008,
+    role:'student',
+    theme:null,
+
+    reports:[
+      R('CARE-1001','Broken corridor light','Electrical','Science Block','Floor 2','In progress','High','Akash M.','me',12),
+      R('CARE-1002','Water leak near lab','Plumbing','Engineering','Room 104','Assigned','Medium','Neha P.','me',60),
+      R('CARE-1003','Damaged projector','Equipment','Arts Block','Room 206','Resolved','Low','Unassigned','me',1440),
+      R('CARE-1004','Air conditioner not working','Equipment','Library','Reading Hall','Submitted','Medium','Unassigned','other',5),
+      R('CARE-1005','Dim lights near cafeteria','Safety','Student Centre','Cafeteria','Under review','High','Security team','other',90),
+      R('CARE-1006','Broken lock on washroom door','Safety','Student Centre','Washroom G','Submitted','High','Unassigned','other',200),
+      R('CARE-1007','Overflowing bin','Cleanliness','Science Block','Lab 204','Submitted','Low','Unassigned','other',300),
+      R('CARE-1008','Unlit path behind workshop','Safety','Engineering','Workshop','Under review','High','Security team','other',240)
+    ],
+
+    sos:[
+      {
+        id:'SOS-1',
+        name:'Riya Sharma',
+        loc:'Library East Wing',
+        t:N-2*MN,
+        status:'Active'
+      }
+    ],
+
+    notes:[
+      {
+        t:'Broken corridor light is now in progress',
+        ts:N-12*MN,
+        read:0
+      }
+    ],
+
+    contacts:[]
+  };
+}
+
+const save=()=>{
+  try {
+    localStorage.setItem(K,JSON.stringify(S));
+  } catch(e) {}
+};
+
+let view='overview';
+
+const ago=t=>{
+  const m=Math.round((Date.now()-t)/MN);
+
+  return m<1?'just now':
+    m<60?m+' min ago':
+    m<1440?Math.round(m/60)+' hr ago':
+    Math.round(m/1440)==1?'yesterday':
+    Math.round(m/1440)+' days ago';
+};
+
+const pill=s=>`<span class="pill ${s.replace(' ','')}">● ${s}</span>`;
+const adm=()=>S.role==='admin';
+
+function toast(t) {
+  const d=document.createElement('div');
+  d.className='toast';
+  d.setAttribute('role','status');
+  d.textContent=t;
+  document.body.append(d);
+  setTimeout(()=>d.remove(),3800);
+}
+
+function note(t) {
+  S.notes.unshift({
+    t,
+    ts:Date.now(),
+    read:0
+  });
+}
+
+function theme() {
+  const r=document.documentElement;
+
+  if(S.theme) {
+    r.dataset.theme=S.theme;
+  } else {
+    r.removeAttribute('data-theme');
+  }
+}
+
+const P={
+  home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  plus:'<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/>',
+  scan:'<path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><rect x="8" y="8" width="8" height="8" rx="1"/>',
+  bell:'<path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/>',
+  shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>',
+  users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.5-4 3-6 6.5-6s6 2 6.5 6M16 4.5a3.5 3.5 0 0 1 0 7M18 14c2 .7 3.2 2.7 3.5 6"/>',
+  map:'<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"/>',
+  cam:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  check:'<path d="M5 12l5 5 9-10"/>',
+  bld:'<path d="M5 21V4h9v17M14 9h5v12M3 21h18M8 8h3M8 12h3M8 16h3"/>',
+  moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>',
+  sc:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>'
+};
+
+const ic=n=>`<svg viewBox="0 0 24 24" aria-hidden="true">${P[n]}</svg>`;
+
+const NAV=()=>[
+  ['overview','home','Overview'],
+  ['reports','plus',adm()?'All reports':'My reports'],
+  ['new','plus','New report'],
+  ['qr','scan','Scan QR'],
+  ['notes','bell','Notifications'],
+  null,
+  ['safety','shield','Safety centre'],
+  ['contacts','users','Trusted contacts']
+];
+
+function render() {
+  theme();
+
+  const mine=S.reports.filter(r=>r.by==='me');
+  const unread=S.notes.some(n=>!n.read);
+
+  $('#side').innerHTML=`
+    <div class="brand">
+      <div class="logo">${ic('shield')}</div>
+      <div><b>CARE</b><small>Campus support</small></div>
+    </div>
+  `+NAV().map(n=>n?
+    `<button class="nav ${view===n[0]?'on':''}" onclick="go('${n[0]}')">
+      <i>${ic(n[1])}</i>
+      ${n[2]}
+      ${n[0]==='reports'&&!adm()?`<em>${mine.length}</em>`:''}
+      ${n[0]==='notes'&&unread?'<span class="dot"></span>':''}
+    </button>`:
+    '<div class="sp"></div>'
+  ).join('')+`
+    <div class="me">
+      <div class="av">AS</div>
+      <div><b>Aarav Singh</b><small>Student · Level 4</small></div>
+      <span style="margin-left:auto;font-size:20px">•••</span>
+    </div>
+  `;
+
+  const body={
+    overview:adm()?admin:student,
+    reports:list,
+    notes:notes,
+    safety:safety,
+    contacts:contacts
+  }[view]();
+
+  $('#main').innerHTML=`
+    <div class="top">
+      <div class="seg">
+        <button class="${adm()?'':'on'}" onclick="role('student')">Student</button>
+        <button class="${adm()?'on':''}" onclick="role('admin')">Admin</button>
+      </div>
+      <div class="tools">
+        <button class="ib" onclick="dark()" aria-label="Toggle dark mode">${ic('moon')}</button>
+        <button class="ib" onclick="go('notes')" aria-label="Notifications">
+          ${ic('bell')}${unread?'<b></b>':''}
+        </button>
+        <div class="av">AS</div>
+      </div>
+    </div>
+  `+body;
+}
+
+const rc=r=>`
+  <div class="rep s-${r.status.replace(' ','')}"
+       tabindex="0"
+       onclick="detail('${r.id}')"
+       onkeydown="if(event.key==='Enter')detail('${r.id}')">
+
+    <div class="ico">
+      ${ic(
+        r.cat==='Electrical'?'plus':
+        r.cat==='Plumbing'?'map':
+        r.cat==='Equipment'?'cam':'shield'
+      )}
+    </div>
+
+    <div class="rb">
+      <div class="lab">${r.cat}</div>
+      <b>${esc(r.title)}</b>
+      <div class="m">${ic('map')} ${r.bld} · ${r.room}${r.me?` · ${r.me+1} affected`:''}</div>
+      <div class="m">${r.status==='Resolved'?'Resolved ':'Updated '}${ago(r.upd)}</div>
+    </div>
+
+    ${pill(r.status)}
+    <span>›</span>
+  </div>
+`;
+
+function student() {
+  const mine=S.reports.filter(r=>r.by==='me');
+  const near=S.reports.filter(r=>r.by!=='me'&&r.status!=='Resolved').slice(0,3);
+  const sc=800+mine.length*20;
+
+  return `
+    <div class="hero">
+      <div class="lab" style="color:#ffffffd0">Campus care, made simple</div>
+      <h1>See it. Report it.<br>We’ll take care of it.</h1>
+      <p>Your reports help make campus safer and better for everyone.</p>
+      <button class="btn b1" onclick="openReport()">${ic('plus')} Report an issue</button>
+      <button class="btn b2" onclick="go('qr')">${ic('scan')} Scan room QR</button>
+      <div class="seal">CARE${ic('sc')}</div>
+    </div>
+
+    <div class="cols">
+      <section>
+        <div class="sh">
+          <div>
+            <div class="lab">Your activity</div>
+            <h2>My reports</h2>
+          </div>
+          <a onclick="go('reports')">View all ›</a>
+        </div>
+
+        ${mine.slice(0,3).map(rc).join('')||
+          '<div class="card">No reports yet. Tap “Report an issue” to start.</div>'}
+
+        <div class="sh" style="margin-top:26px">
+          <div>
+            <div class="lab">Around you</div>
+            <h2>Nearby campus issues</h2>
+          </div>
+          <a onclick="mapM()">Explore map ›</a>
+        </div>
+
+        ${near.map(r=>`
+          <div class="rep" style="cursor:default">
+            <div class="ico">${ic('bld')}</div>
+            <div class="rb">
+              ${pill(r.status==='Submitted'?'Reported':r.status)}
+              <b style="margin-top:6px">${esc(r.title)}</b>
+              <div class="m">${ic('map')} ${r.bld} · ${r.room} · ${ago(r.upd)}</div>
+              <div class="m">
+                ${r.me?r.me+1+' students affected. ':''}
+                Help confirm this issue so it gets attention faster.
+              </div>
+            </div>
+            <button class="btn mt" onclick="meToo('${r.id}')">Me too</button>
+          </div>
+        `).join('')}
+      </section>
+
+      <aside>
+        <div class="imp">
+          <div class="sc"><div>${sc}<small>score</small></div></div>
+          <div class="lab" style="color:#ffffffb0">Your impact</div>
+          <h3 style="font-weight:400;font-size:24px;margin:8px 0 2px">Trusted Reporter</h3>
+          <div style="opacity:.85">Level 4 · Campus Guardian</div>
+          <div class="bar"><i style="width:72%"></i></div>
+          <small>140 points to reach Level 5</small>
+          <hr style="border:0;border-top:1px solid #ffffff30;margin:16px 0">
+          <b>+${24+mine.length-3} confirmed</b>
+          &nbsp;&nbsp;
+          <b>98% accuracy</b>
+        </div>
+
+        <div class="card">
+          <div class="m">Need help now?</div>
+          <b>Campus Security</b>
+          <div class="tel">1800 123 456</div>
+          <div class="m">National emergency:</div>
+          <b>112</b>
+        </div>
+      </aside>
+    </div>
+  `;
+}
+
+const SEEDO={
+  'Science Block':2,
+  'Engineering':2,
+  'Library':1,
+  'Student Centre':2
+};
+
+const BASE={
+  'Science Block':18,
+  'Engineering':12,
+  'Library':7,
+  'Student Centre':5
+};
+
+const LBL={
+  'Science Block':'Science block',
+  'Library':'Main library',
+  'Student Centre':'Student centre'
+};
+
+let bf='All buildings';
+
+function hot() {
+  const c={};
+
+  S.reports
+    .filter(r=>r.status!=='Resolved')
+    .forEach(r=>c[r.bld]=(c[r.bld]||0)+1);
+
+  return Object.keys(Object.assign({},BASE,c))
+    .map(b=>[b,(BASE[b]||0)-(SEEDO[b]||0)+(c[b]||0)])
+    .filter(x=>x[1]>0)
+    .sort((a,b)=>b[1]-a[1]);
+}
+
+const hbars=hs=>hs.map(([b,n])=>`
+  <div class="hs">
+    <div><span>${LBL[b]||b}</span><small>${n} open</small></div>
+    <i><s style="width:${n/hs[0][1]*100}%"></s></i>
+  </div>
+`).join('')||'<p class="m">No open issues.</p>';
+
+const stc=(i,l,v,d,bar,tb,tc,dc)=>`
+  <div class="st" style="--bar:${bar}">
+    <div class="si" style="background:${tb};color:${tc}">${ic(i)}</div>
+    <div>
+      <div class="m">${l}</div>
+      <b>${v}</b>
+      <small style="color:${dc}">${d}</small>
+    </div>
+  </div>
+`;
+
+function admin() {
+  const o=S.reports.filter(r=>r.status!=='Resolved');
+  const res=S.reports.length-o.length;
+  const op=42+o.length-7;
+  const asg=16+o.filter(r=>/Assigned|In progress/.test(r.status)).length-2;
+  const aw=Math.max(0,4+o.filter(r=>/Submitted|Under|Reopened/.test(r.status)).length-5);
+  const act=S.sos.find(s=>s.status!=='Resolved');
+  const nu=new Set(o.filter(r=>r.cat==='Safety').map(r=>r.bld)).size;
+
+  return `
+    <div class="sh">
+      <div>
+        <div class="lab" style="letter-spacing:.1em;text-transform:none;font-size:14px">
+          ${new Date().toLocaleDateString('en-GB',{
+            weekday:'long',
+            day:'numeric',
+            month:'long'
+          })}
+        </div>
+        <h2 class="gh">Good morning, Admin</h2>
+        <div class="m">Here’s what needs attention across campus today.</div>
+      </div>
+      <button class="btn dl" onclick="rep()">Download report</button>
+    </div>
+
+    ${act?`
+      <div class="alert">
+        <div class="sosb">SOS</div>
+        <div>
+          <b style="font-size:18px">${act.status==='Active'?'Active safety alert':'Alert acknowledged'}</b>
+          <br>
+          <span class="m">${esc(act.name)} · ${esc(act.loc)} · ${ago(act.t)}</span>
+        </div>
+        <b style="color:#c0392b;font-size:12px">LIVE</b>
+        <button class="btn" style="background:#e1403f;color:#fff;padding:12px 20px;font-size:15px"
+          onclick="sosAct('${act.id}')">
+          ${act.status==='Active'?'Respond now ›':'Mark resolved ›'}
+        </button>
+      </div>
+    `:''}
+
+    <div class="stats">
+      ${stc('plus','Open issues',op,'↓ 8% this week','linear-gradient(90deg,#0b8d7d,#7a5be0)','#d9f3ec','#0b8d7d','#17734f')}
+      ${stc('clock','Avg. resolution','18.4h','2.1h faster','linear-gradient(90deg,#3f8fdc,#7a5be0)','#dce9fb','#3d7ad1','#2557a7')}
+      ${stc('users','Assigned today',asg,aw+' awaiting','linear-gradient(90deg,#e29b2d,#e0564f)','#fdebd0','#d98a1a','#b9770e')}
+      ${stc('check','Resolved this month',128+res-1,'↑ 12% vs last month','linear-gradient(90deg,#2c9d73,#0b8d7d)','#d3f0e3','#23956a','#17734f')}
+    </div>
+
+    <div class="cols">
+      <div class="card" style="padding:0;overflow:hidden">
+        <div class="sh" style="padding:22px 26px">
+          <div>
+            <h3>Issue management</h3>
+            <div class="m">Review, filter and assign campus reports</div>
+          </div>
+          <select class="bsel" aria-label="Filter by building"
+            onchange="bf=this.value;render()">
+            ${['All buildings',...Object.keys(BLD)].map(b=>
+              `<option ${b===bf?'selected':''}>${b}</option>`
+            ).join('')}
+          </select>
+        </div>
+
+        ${tbl(S.reports.filter(r=>bf==='All buildings'||r.bld===bf).slice(0,3))}
+
+        <div style="padding:14px;text-align:center">
+          <a style="color:var(--teal);cursor:pointer;font-size:14px" onclick="go('reports')">
+            View all ${op} reports
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Campus hotspots</h3>
+        <div class="m">Open issues by building</div>
+        ${hbars(hot())}
+        ${nu?`
+          <div class="flag">
+            ${ic('shield')}
+            <div>
+              <b>${nu} unsafe area${nu>1?'s':''} flagged</b>
+              <br>
+              <small>Based on repeated safety reports</small>
+            </div>
+          </div>
+        `:''}
+      </div>
+    </div>
+  `;
+}
+
+const tbl=rs=>`
+  <table>
+    <thead>
+      <tr>
+        <th>ISSUE</th>
+        <th>PRIORITY</th>
+        <th>STATUS</th>
+        <th>ASSIGNED TO</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${rs.map(r=>`
+        <tr>
+          <td>
+            <b onclick="detail('${r.id}')">${esc(r.title)}</b>
+            <small>${r.bld} · ${r.room} · ${r.status==='Resolved'?'Resolved ':'Updated '}${ago(r.upd)}</small>
+          </td>
+          <td class="p-${r.pri}">${r.pri}</td>
+          <td>
+            <select class="pill ps ${r.status.replace(' ','')}"
+              aria-label="Status"
+              onchange="setS('${r.id}',this.value)">
+              ${ST.map(s=>`<option ${s===r.status?'selected':''}>${s}</option>`).join('')}
+            </select>
+          </td>
+          <td>
+            <select class="as" aria-label="Assign"
+              onchange="setA('${r.id}',this.value)">
+              ${TEAM.map(s=>`<option ${s===r.as?'selected':''}>${s}</option>`).join('')}
+            </select>
+          </td>
+        </tr>
+      `).join('')}
+    </tbody>
+  </table>
+`;
+
+function list() {
+  let rs=adm()?S.reports:S.reports.filter(r=>r.by==='me');
+  rs=rs.slice().sort((a,b)=>b.upd-a.upd);
+
+  return `
+    <div>
+      <div class="lab">${adm()?'Administration':'Your activity'}</div>
+      <h2>${adm()?'All reports':'My reports'}</h2>
+    </div>
+  `+(adm()?
+    `<div class="card" style="padding:0;overflow:hidden">${tbl(rs)}</div>`:
+    rs.map(rc).join('')||'<div class="card">No reports yet.</div>'
+  );
+}
+
+function notes() {
+  setTimeout(()=>{
+    S.notes.forEach(n=>n.read=1);
+    save();
+  },300);
+
+  return `
+    <div>
+      <div class="lab">Updates</div>
+      <h2>Notifications</h2>
+    </div>
+  `+(S.notes.map(n=>`
+    <div class="card" style="margin-bottom:10px">
+      <b>${esc(n.t)}</b>
+      <div class="m">${ago(n.ts)}</div>
+    </div>
+  `).join('')||'<div class="card">You’re all caught up.</div>');
+}
+
+function safety() {
+  const u={};
+
+  S.reports
+    .filter(r=>r.cat==='Safety'&&r.status!=='Resolved')
+    .forEach(r=>u[r.bld]=(u[r.bld]||0)+1);
+
+  return `
+    <div>
+      <div class="lab">Stay safe</div>
+      <h2>Safety centre</h2>
+    </div>
+
+    <div class="card">
+      <h3>Emergency numbers</h3>
+      <div class="tel">1800 123 456</div>
+      <div class="m">Campus Security · National emergency: <b>112</b></div>
+    </div>
+
+    <div class="card">
+      <h3>Open safety reports by area</h3>
+      ${Object.entries(u).map(([b,n])=>`<p><b>${b}</b>: ${n} open</p>`).join('')||'<p class="m">None right now.</p>'}
+    </div>
+
+    <div class="card">
+      <h3>How SOS works</h3>
+      <p class="m">
+        Hold the red SOS button for one second. The alert appears in the CARE responder queue.
+        This demo does not call, text or contact emergency services, so call security or 112 directly in a real emergency.
+      </p>
+    </div>
+  `;
+}
+
+function contacts() {
+  return `
+    <div>
+      <div class="lab">People you trust</div>
+      <h2>Trusted contacts</h2>
+    </div>
+
+    <div class="card">
+      <div class="g2">
+        <input type="text" id="cn" placeholder="Name" aria-label="Name">
+        <input type="tel" id="cp" placeholder="Phone" aria-label="Phone">
+      </div>
+      <button class="btn bp" onclick="addC()">Save contact</button>
+    </div>
+  `+S.contacts.map((c,i)=>`
+    <div class="card" style="margin-top:10px;display:flex;justify-content:space-between">
+      <div>
+        <b>${esc(c.n)}</b>
+        <div class="m">${esc(c.p)}</div>
+      </div>
+      <button class="ib" onclick="delC(${i})" aria-label="Remove">✕</button>
+    </div>
+  `).join('');
+}
+
+function addC() {
+  const n=$('#cn').value.trim();
+  const p=$('#cp').value.trim();
+
+  if(!n||!p) return toast('Enter a name and phone number.');
+
+  S.contacts.push({n,p});
+  save();
+  render();
+}
+
+function delC(i) {
+  S.contacts.splice(i,1);
+  save();
+  render();
+}
+
+function rep() {
+  const csv='id,title,category,building,room,status,priority,assigned\n'+
+    S.reports.map(r=>
+      [r.id,r.title,r.cat,r.bld,r.room,r.status,r.pri,r.as]
+        .map(v=>'"'+String(v).replace(/"/g,'""')+'"')
+        .join(',')
+    ).join('\n');
+
+  modal(`
+    <div style="display:flex;justify-content:space-between">
+      <h2>Report data</h2>
+      <button class="ib" onclick="closeM()" aria-label="Close">✕</button>
+    </div>
+    <p class="m">File downloads are blocked in this preview. Copy the CSV below.</p>
+    <textarea rows="10" readonly onfocus="this.select()">${esc(csv)}</textarea>
+  `);
+}
+
+function mapM() {
+  modal(`
+    <div style="display:flex;justify-content:space-between">
+      <div>
+        <div class="lab">Around you</div>
+        <h2>Open issues by building</h2>
+      </div>
+      <button class="ib" onclick="closeM()" aria-label="Close">✕</button>
+    </div>
+    ${hbars(hot())}
+  `);
+}
+
+function go(v) {
+  if(v==='new') return openReport();
+  if(v==='qr') return openQR();
+
+  view=v;
+  render();
+  scrollTo(0,0);
+}
+
+function role(r) {
+  S.role=r;
+  view='overview';
+  save();
+  render();
+}
+
+function dark() {
+  const d=document.documentElement.dataset.theme==='dark'||
+    (!S.theme&&matchMedia('(prefers-color-scheme:dark)').matches);
+
+  S.theme=d?'light':'dark';
+  save();
+  render();
+}
+
+function modal(h) {
+  $('#layer').innerHTML=`
+    <div class="ov" onclick="if(event.target===this)closeM()">
+      <div class="mod" role="dialog" aria-modal="true">${h}</div>
+    </div>
+  `;
+}
+
+const closeM=()=>$('#layer').innerHTML='';
+
+let draft={};
+
+function openReport(pre) {
+  draft=Object.assign({
+    cat:'Electrical',
+    bld:'Science Block',
+    room:'Room 204',
+    anon:0
+  },pre||{});
+
+  rform();
+}
+
+function rform() {
+  const d=draft;
+
+  modal(`
+    <div style="display:flex;justify-content:space-between">
+      <div>
+        <div class="lab" style="text-transform:none;letter-spacing:.1em;font-size:13px">New report</div>
+        <h2>What needs attention?</h2>
+      </div>
+      <button class="ib" onclick="closeM()" aria-label="Close">✕</button>
+    </div>
+
+    <label class="l">Category</label>
+
+    <div class="chips">
+      ${CATS.map(c=>`
+        <button class="chip ${c===d.cat?'on':''}"
+          onclick="keep();draft.cat='${c}';rform()">
+          ${c}
+        </button>
+      `).join('')}
+    </div>
+
+    <div class="g2">
+      <div>
+        <label class="l" for="bd">Building</label>
+        <select id="bd" onchange="keep();draft.room=BLD[draft.bld][0];rform()">
+          ${Object.keys(BLD).map(b=>`<option ${b===d.bld?'selected':''}>${b}</option>`).join('')}
+        </select>
+      </div>
+
+      <div>
+        <label class="l" for="rm">Room</label>
+        <select id="rm">
+          ${BLD[d.bld].map(r=>`<option ${r===d.room?'selected':''}>${r}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+
+    <label class="l">Photo</label>
+
+    <label class="drop">
+      <span style="color:#3b7fd0;font-size:19px;font-weight:500">
+        ${ic('cam')} Add a photo
+      </span>
+      <br>
+      <small id="fn">${esc(d.file||'Take a photo or upload from device')}</small>
+      <input type="file" accept="image/*" hidden
+        onchange="draft.file=this.files[0]?.name;$('#fn').textContent=draft.file||''">
+    </label>
+
+    <label class="l" for="ds">Description</label>
+    <textarea id="ds" rows="4" placeholder="Tell us what happened and where to find it…">${esc(d.desc||'')}</textarea>
+
+    <div class="anon">
+      <div style="flex:1">
+        <b>Report anonymously</b>
+        <small>Hidden from students, visible to admin. Only confirmed fake reports lower your score.</small>
+      </div>
+      <input type="checkbox" class="sw" id="an" ${d.anon?'checked':''}>
+    </div>
+
+    <button class="btn bp" onclick="submit()">Submit report ›</button>
+  `);
+}
+
+function keep() {
+  draft.bld=$('#bd').value;
+  draft.room=$('#rm').value;
+  draft.desc=$('#ds').value;
+  draft.anon=$('#an').checked?1:0;
+}
+
+function submit() {
+  keep();
+
+  const d=draft;
+
+  if(d.desc.trim().length<5) {
+    return toast('Add a short description so the team knows what to fix.');
+  }
+
+  const dup=S.reports.find(r=>
+    r.status!=='Resolved'&&
+    r.bld===d.bld&&
+    r.room===d.room&&
+    r.cat===d.cat
+  );
+
+  if(dup&&confirm(
+    `A similar report already exists: “${dup.title}” (${dup.id}). Press OK to add “Me too” instead of a new report.`
+  )) {
+    closeM();
+    return meToo(dup.id);
+  }
+
+  const id='CARE-'+(++S.seq);
+  const t=d.desc.trim();
+
+  S.reports.unshift({
+    id,
+    title:t.length>42?t.slice(0,40)+'…':t,
+    cat:d.cat,
+    bld:d.bld,
+    room:d.room,
+    desc:t,
+    status:'Submitted',
+    pri:d.cat==='Safety'?'High':'Medium',
+    as:'Unassigned',
+    by:'me',
+    anon:d.anon,
+    me:0,
+    upd:Date.now(),
+    hist:[['Submitted',Date.now()]]
+  });
+
+  note(`Report ${id} submitted`);
+  save();
+  closeM();
+  view='reports';
+  render();
+
+  toast(`Report submitted. Your tracking ID is ${id}.`);
+}
+
+function meToo(id) {
+  const r=S.reports.find(x=>x.id===id);
+
+  r.me++;
+  r.upd=Date.now();
+
+  save();
+  render();
+
+  toast('Thanks. Your confirmation was added to this issue.');
+}
+
+function openQR() {
+  modal(`
+    <div style="display:flex;justify-content:space-between">
+      <div>
+        <div class="lab">Scan room QR</div>
+        <h2>Choose a room code</h2>
+      </div>
+      <button class="ib" onclick="closeM()" aria-label="Close">✕</button>
+    </div>
+
+    <p class="m">
+      This demo can’t use your camera. Pick a room to simulate a scan.
+      Printed QR codes simply link to this page ending in
+      <code>#loc=Building|Room</code>.
+    </p>
+
+    <div class="chips">
+      ${Object.entries(BLD).flatMap(([b,rs])=>
+        rs.map(r=>`
+          <button class="chip" onclick="openReport({bld:'${b}',room:'${r}'})">
+            ${b} — ${r}
+          </button>
+        `)
+      ).join('')}
+    </div>
+  `);
+}
+
+function detail(id) {
+  const r=S.reports.find(x=>x.id===id);
+  const mine=r.by==='me';
+
+  modal(`
+    <div style="display:flex;justify-content:space-between">
+      <div>
+        <div class="lab">${r.id} · ${r.cat}</div>
+        <h2>${esc(r.title)}</h2>
+      </div>
+      <button class="ib" onclick="closeM()" aria-label="Close">✕</button>
+    </div>
+
+    ${pill(r.status)}
+    <span class="p-${r.pri}">${r.pri} priority</span>
+
+    <p class="m">
+      ${ic('map')} ${r.bld} · ${r.room} · Assigned to ${r.as}
+      ${r.me?` · ${r.me+1} students affected`:''}
+    </p>
+
+    ${r.desc?`<p>${esc(r.desc)}</p>`:''}
+
+    <div class="lab">History</div>
+
+    <div class="tl">
+      ${r.hist.map(h=>`
+        <div>
+          <b>${h[0]}</b>
+          <div class="m">${ago(h[1])}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    ${mine&&r.status==='Resolved'?`
+      <button class="btn bp" onclick="setS('${r.id}','Reopened');closeM()">
+        Problem is back, reopen
+      </button>
+    `:''}
+  `);
+}
+
+function setS(id,s) {
+  const r=S.reports.find(x=>x.id===id);
+
+  r.status=s;
+  r.upd=Date.now();
+  r.hist.push([s,r.upd]);
+
+  if(r.by==='me') {
+    note(`${r.title} is now ${s.toLowerCase()}`);
+  }
+
+  save();
+  render();
+}
+
+function setA(id,a) {
+  const r=S.reports.find(x=>x.id===id);
+
+  r.as=a;
+  r.upd=Date.now();
+
+  if(a!=='Unassigned'&&r.status==='Submitted') {
+    r.status='Assigned';
+    r.hist.push(['Assigned to '+a,r.upd]);
+  }
+
+  if(r.by==='me') {
+    note(`${r.title} assigned to ${a}`);
+  }
+
+  save();
+  render();
+}
+
+function sosAct(id) {
+  const s=S.sos.find(x=>x.id===id);
+
+  s.status=s.status==='Active'?'Acknowledged':'Resolved';
+
+  save();
+  render();
+}
+
+let tm;
+const b=$('#sosb');
+
+b.onpointerdown=e=>{
+  b.classList.add('hold');
+
+  tm=setTimeout(()=>{
+    b.classList.remove('hold');
+
+    const s={
+      id:'SOS-'+(S.sos.length+1),
+      name:'Aarav Singh',
+      loc:'Campus (location not shared)',
+      t:Date.now(),
+      status:'Active'
+    };
+
+    S.sos.unshift(s);
+    save();
+    render();
+
+    modal(`
+      <h2>SOS logged</h2>
+      <p>Request <b>${s.id}</b> is now in the CARE responder queue.</p>
+      <p>
+        <b>This demo does not call or text anyone.</b>
+        If you need help right now, call Campus Security on
+        <b>1800 123 456</b> or <b>112</b>.
+      </p>
+      <button class="btn bp" onclick="closeM()">Close</button>
+    `);
+  },1200);
+};
+
+b.onpointerup=b.onpointerleave=b.onpointercancel=()=>{
+  clearTimeout(tm);
+  b.classList.remove('hold');
+};
+
+b.onkeydown=e=>{
+  if(e.key==='Enter') b.onpointerdown();
+};
+
+b.onkeyup=()=>b.onpointerup();
+
+const h=decodeURIComponent(location.hash);
+
+if(h.startsWith('#loc=')) {
+  const [bb,rr]=h.slice(5).split('|');
+
+  if(BLD[bb]) {
+    setTimeout(()=>{
+      openReport({
+        bld:bb,
+        room:BLD[bb].includes(rr)?rr:BLD[bb][0]
+      });
+    },200);
+  }
+}
+
+render();
+</script>
+</body>
+</html>
